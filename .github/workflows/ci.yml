@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+          bundler-cache: true
+      - name: Validate entries against controlled vocabulary
+        run: ruby scripts/validate_entries.rb
+      - name: Build with Jekyll (catches broken front-matter / Liquid)
+        run: bundle exec jekyll build
+        env:
+          JEKYLL_ENV: production

@@ -1,0 +1,148 @@
+name: Suggest a method
+description: Propose a working museomics method to add to the Methods page.
+title: "[Method] "
+labels: ["type: method-suggestion"]
+# NOTE: the dropdown options below mirror _data/tags.yml. GitHub Issue Forms
+# cannot read that file, so if you add a vocabulary term there, add it here too.
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for contributing! Fill in what you can. A maintainer will review
+        and add it to the site. Fields marked * are required.
+  - type: input
+    id: title
+    attributes:
+      label: Title*
+      placeholder: e.g. Genome skimming from a 40-year-old pinned beetle
+    validations:
+      required: true
+  - type: input
+    id: summary
+    attributes:
+      label: One-line summary*
+      description: Shown on the collapsed card.
+    validations:
+      required: true
+  - type: dropdown
+    id: kingdom
+    attributes:
+      label: Kingdom*
+      multiple: true
+      options: [Animalia, Plantae, Fungi, Chromista, Bacteria, Archaea]
+    validations:
+      required: true
+  - type: dropdown
+    id: phylum
+    attributes:
+      label: Phylum / Division*
+      multiple: true
+      options:
+        - Chordata
+        - Arthropoda
+        - Mollusca
+        - Annelida
+        - Echinodermata
+        - Cnidaria
+        - Nematoda
+        - Platyhelminthes
+        - Porifera
+        - Tracheophyta
+        - Bryophyta
+        - Ascomycota
+        - Basidiomycota
+        - "Other (describe in detail box)"
+    validations:
+      required: true
+  - type: dropdown
+    id: preservation
+    attributes:
+      label: Preservation type*
+      multiple: true
+      options:
+        - dry-pinned
+        - study-skin
+        - herbarium-pressed
+        - fluid-ethanol
+        - fluid-formalin
+        - frozen
+        - dried-tissue
+        - bone-subfossil
+        - "Other (describe in detail box)"
+    validations:
+      required: true
+  - type: dropdown
+    id: extraction
+    attributes:
+      label: Extraction method*
+      multiple: true
+      options:
+        - silica-column
+        - magnetic-bead
+        - phenol-chloroform
+        - ctab
+        - chelex
+        - "Other (describe in detail box)"
+    validations:
+      required: true
+  - type: dropdown
+    id: library
+    attributes:
+      label: Library prep method*
+      multiple: true
+      options:
+        - tagmentation
+        - ligation
+        - single-stranded
+        - pcr-free
+        - hybridization-capture
+        - "Other (describe in detail box)"
+    validations:
+      required: true
+  - type: dropdown
+    id: sequencing
+    attributes:
+      label: Sequencing / downstream method*
+      multiple: true
+      options:
+        - genome-skimming
+        - shotgun-wgs
+        - target-capture
+        - metabarcoding
+        - rad-seq
+        - sanger
+        - "Other (describe in detail box)"
+    validations:
+      required: true
+  - type: dropdown
+    id: outcome
+    attributes:
+      label: Outcome
+      description: How well did it work?
+      options:
+        - worked-well
+        - worked-with-caveats
+        - exploratory
+    validations:
+      required: false
+  - type: input
+    id: doi
+    attributes:
+      label: DOI or link to paper
+      description: Optional — leave blank for unpublished / in-house methods.
+      placeholder: 10.xxxx/xxxxx
+    validations:
+      required: false
+  - type: textarea
+    id: detail
+    attributes:
+      label: Detail / notes
+      description: Protocol notes, yields, caveats. Becomes the expanded card body. Markdown OK.
+    validations:
+      required: false
+  - type: input
+    id: contributor
+    attributes:
+      label: Your name (for attribution)
+    validations:
+      required: false

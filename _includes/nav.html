@@ -1,0 +1,10 @@
+<header class="site-nav">
+  <div class="container nav-inner">
+    <a class="brand" href="{{ '/' | relative_url }}">museomics<span class="brand-slash">/</span>methods</a>
+    <nav aria-label="Primary">
+      <a href="{{ '/' | relative_url }}"{% if page.page_id == 'methods' %} aria-current="page"{% endif %}>Methods</a>
+      <a href="{{ '/bibliography/' | relative_url }}"{% if page.page_id == 'bibliography' %} aria-current="page"{% endif %}>Bibliography</a>
+      <a href="{{ '/contribute/' | relative_url }}"{% if page.page_id == 'contribute' %} aria-current="page"{% endif %}>Contribute</a>
+    </nav>
+  </div>
+</header>

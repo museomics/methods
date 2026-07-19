@@ -1,0 +1,81 @@
+# -----------------------------------------------------------------------------
+# Controlled vocabulary (single source of truth for filter options)
+# -----------------------------------------------------------------------------
+# This file drives the filter UI on the Methods and Bibliography pages AND is
+# enforced by CI: every tag used in an entry's front-matter must appear here,
+# or the build fails (see scripts/validate_entries.rb).
+#
+# To add a term: add it to the relevant list below, in a PR. If it is a term
+# that also appears as a dropdown in a GitHub Issue Form, update the matching
+# option list in .github/ISSUE_TEMPLATE/*.yml too (the forms cannot read this
+# file automatically). CONTRIBUTING.md explains this.
+#
+# Values are the canonical stored form (lower-case, hyphenated where multi-word)
+# except taxonomy, which uses conventional capitalised names.
+# -----------------------------------------------------------------------------
+
+# Taxonomy is split into two levels so visitors can filter broadly (Kingdom) or
+# more specifically (Phylum / Division). Curated by the maintainer; extend as
+# real contributions arrive rather than pre-populating exhaustively.
+kingdom:
+  - Animalia
+  - Plantae
+  - Fungi
+  - Chromista
+  - Bacteria
+  - Archaea
+
+phylum:            # "Phylum / Division" — divisions are the botanical equivalent
+  - Chordata
+  - Arthropoda
+  - Mollusca
+  - Annelida
+  - Echinodermata
+  - Cnidaria
+  - Nematoda
+  - Platyhelminthes
+  - Porifera
+  - Tracheophyta   # vascular plants
+  - Bryophyta      # mosses
+  - Ascomycota
+  - Basidiomycota
+
+preservation:
+  - dry-pinned
+  - study-skin
+  - herbarium-pressed
+  - fluid-ethanol
+  - fluid-formalin
+  - frozen
+  - dried-tissue
+  - bone-subfossil
+
+extraction:
+  - silica-column
+  - magnetic-bead
+  - phenol-chloroform
+  - ctab
+  - chelex
+
+library:
+  - tagmentation
+  - ligation
+  - single-stranded
+  - pcr-free
+  - hybridization-capture
+
+sequencing:
+  - genome-skimming
+  - shotgun-wgs
+  - target-capture
+  - metabarcoding
+  - rad-seq
+  - sanger
+
+# Optional, controlled outcome signal for method entries (see facets.yml).
+# Lets visitors gauge how well a method worked at a glance. Not a filter facet
+# by default, but validated when present.
+outcome:
+  - worked-well
+  - worked-with-caveats
+  - exploratory

@@ -1,0 +1,28 @@
+---
+layout: default
+page_id: method
+---
+<article class="method-page">
+  <p class="back-link"><a href="{{ '/' | relative_url }}">← All methods</a></p>
+  <h1>{{ page.title }}</h1>
+  {% if page.summary %}<p class="lead">{{ page.summary }}</p>{% endif %}
+
+  <ul class="chip-row" aria-label="Tags">
+    {% for f in site.data.facets %}
+      {% assign vals = page[f.key] %}
+      {% if vals %}{% for v in vals %}
+        <li class="chip chip--{{ f.color }}"><span class="chip-abbr" title="{{ f.label }}">{{ f.abbr }}</span>{{ v }}</li>
+      {% endfor %}{% endif %}
+    {% endfor %}
+  </ul>
+
+  <div class="method-body">
+    {{ content }}
+  </div>
+
+  <dl class="method-meta">
+    {% if page.doi %}<dt>Source</dt><dd><a href="https://doi.org/{{ page.doi }}" target="_blank" rel="noopener">doi.org/{{ page.doi }}</a></dd>{% endif %}
+    {% if page.contributor %}<dt>Contributor</dt><dd>{{ page.contributor }}</dd>{% endif %}
+    {% if page.date %}<dt>Added</dt><dd>{{ page.date | date: "%Y-%m-%d" }}</dd>{% endif %}
+  </dl>
+</article>

@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Contribute directly (pull request)
+    url: https://github.com/museomics/methods/blob/main/CONTRIBUTING.md
+    about: Comfortable with GitHub? Add an entry by PR instead.

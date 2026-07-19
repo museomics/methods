@@ -1,0 +1,42 @@
+title: "museomics / methods"
+description: >-
+  A community resource for museomics — DNA-based methods applied to museum
+  specimens — showcasing working methods across taxonomic groups and
+  preservation types, with a curated bibliography of supporting papers and SOPs.
+# Served as a GitHub Pages project site at museomics.github.io/methods/
+url: "https://museomics.github.io"
+baseurl: "/methods"
+
+collections:
+  methods:
+    output: true
+    permalink: /method/:name/
+  bibliography:
+    output: false
+
+# Per-entry method pages are JSON-driven on the index; the standalone rendered
+# page exists mainly to give each method a stable permalink.
+defaults:
+  - scope:
+      path: ""
+      type: methods
+    values:
+      layout: method
+
+plugins:
+  - jekyll-sitemap
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - scripts
+  - SPEC.md
+  - CONTRIBUTING.md
+  - README.md
+  - LICENSE
+  - LICENSE-CONTENT.md
+  - "*.gemspec"
+
+sass:
+  style: compressed

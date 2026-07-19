@@ -1,0 +1,73 @@
+name: Suggest a bibliography entry
+description: Propose a paper or SOP to add to the Bibliography page.
+title: "[Bibliography] "
+labels: ["type: bibliography-suggestion"]
+# NOTE: tag options mirror _data/tags.yml — update both together.
+body:
+  - type: markdown
+    attributes:
+      value: "Fields marked * are required."
+  - type: dropdown
+    id: type
+    attributes:
+      label: Type*
+      options: [paper, sop]
+    validations:
+      required: true
+  - type: input
+    id: title
+    attributes:
+      label: Title*
+    validations:
+      required: true
+  - type: input
+    id: authors
+    attributes:
+      label: Authors or institution*
+    validations:
+      required: true
+  - type: input
+    id: year
+    attributes:
+      label: Year / date*
+      placeholder: e.g. 2024
+    validations:
+      required: true
+  - type: input
+    id: link
+    attributes:
+      label: Link or DOI*
+      placeholder: https://doi.org/10.xxxx/xxxxx
+    validations:
+      required: true
+  - type: dropdown
+    id: tags
+    attributes:
+      label: Relevant method tags
+      multiple: true
+      options:
+        - silica-column
+        - magnetic-bead
+        - phenol-chloroform
+        - ctab
+        - chelex
+        - tagmentation
+        - ligation
+        - single-stranded
+        - pcr-free
+        - hybridization-capture
+        - genome-skimming
+        - shotgun-wgs
+        - target-capture
+        - metabarcoding
+        - rad-seq
+        - sanger
+    validations:
+      required: false
+  - type: input
+    id: notes
+    attributes:
+      label: Relevance note
+      description: Optional one-line note on why it's relevant.
+    validations:
+      required: false
