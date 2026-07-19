@@ -1,0 +1,25 @@
+---
+layout: null
+sitemap: false
+---
+[
+{% for m in site.methods %}
+  {
+    "id": {{ m.slug | jsonify }},
+    "url": {{ m.url | relative_url | jsonify }},
+    "title": {{ m.title | jsonify }},
+    "summary": {{ m.summary | jsonify }},
+    "doi": {{ m.doi | jsonify }},
+    "contributor": {{ m.contributor | jsonify }},
+    "date": {{ m.date | date: "%Y-%m-%d" | jsonify }},
+    "outcome": {{ m.outcome | jsonify }},
+    "kingdom": {{ m.kingdom | jsonify }},
+    "phylum": {{ m.phylum | jsonify }},
+    "preservation": {{ m.preservation | jsonify }},
+    "extraction": {{ m.extraction | jsonify }},
+    "library": {{ m.library | jsonify }},
+    "sequencing": {{ m.sequencing | jsonify }},
+    "body": {{ m.content | jsonify }}
+  }{% unless forloop.last %},{% endunless %}
+{% endfor %}
+]

@@ -1,0 +1,18 @@
+---
+layout: null
+sitemap: false
+---
+[
+{% for b in site.bibliography %}
+  {
+    "id": {{ b.slug | jsonify }},
+    "type": {{ b.type | jsonify }},
+    "title": {{ b.title | jsonify }},
+    "authors_or_institution": {{ b.authors_or_institution | jsonify }},
+    "year_or_date": {{ b.year_or_date | jsonify }},
+    "link": {{ b.link | jsonify }},
+    "tags": {{ b.tags | jsonify }},
+    "notes": {{ b.notes | jsonify }}
+  }{% unless forloop.last %},{% endunless %}
+{% endfor %}
+]

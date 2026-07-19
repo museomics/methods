@@ -1,0 +1,41 @@
+# Facet display metadata. Order here = order in the filter bar and legend.
+# `key` matches a list in tags.yml and a field in entry front-matter.
+# `abbr` is shown as a small badge on each chip so facets are distinguishable
+# without relying on colour alone (accessibility).
+# `methods` / `bibliography` flag which page a facet applies to.
+- key: kingdom
+  label: Kingdom
+  abbr: K
+  color: green
+  methods: true
+  bibliography: false
+- key: phylum
+  label: Phylum / Division
+  abbr: P
+  color: teal
+  methods: true
+  bibliography: false
+- key: preservation
+  label: Preservation
+  abbr: Pr
+  color: blue
+  methods: true
+  bibliography: false
+- key: extraction
+  label: Extraction
+  abbr: Ex
+  color: orange
+  methods: true
+  bibliography: true
+- key: library
+  label: Library prep
+  abbr: Lb
+  color: purple
+  methods: true
+  bibliography: true
+- key: sequencing
+  label: Sequencing
+  abbr: Sq
+  color: red
+  methods: true
+  bibliography: true

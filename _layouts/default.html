@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{{ page.description | default: site.description | strip_newlines }}">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧬</text></svg>">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  <script>
+    // Injected once from Jekyll config/data so client-side JS never has to
+    // guess the base path or re-derive the controlled vocabulary.
+    window.SITE = {
+      baseurl: {{ site.baseurl | jsonify }},
+      facets: {{ site.data.facets | jsonify }},
+      vocab: {{ site.data.tags | jsonify }}
+    };
+  </script>
+</head>
+<body data-page="{{ page.page_id }}">
+  {% include nav.html %}
+  <main class="container">
+    {{ content }}
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <p>
+        A community museomics resource ·
+        <a href="https://github.com/museomics/methods">Source on GitHub</a>
+      </p>
+      <p class="muted">
+        Code licensed MIT · entry content licensed
+        <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a>
+      </p>
+    </div>
+  </footer>
+  {% if page.scripts %}{% for s in page.scripts %}
+  <script src="{{ s | relative_url }}"></script>
+  {% endfor %}{% endif %}
+</body>
+</html>

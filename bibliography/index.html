@@ -1,0 +1,42 @@
+---
+layout: default
+page_id: bibliography
+title: Bibliography
+scripts:
+  - /assets/js/app.js
+---
+<header class="page-head">
+  <h1>Bibliography</h1>
+  <p class="lead">
+    Papers and standard operating procedures (SOPs) relevant to museomics,
+    curated from community suggestions. Filter by type or by method tag.
+  </p>
+</header>
+
+<section class="controls" aria-label="Search and filters">
+  <div class="searchbar">
+    <label for="q" class="visually-hidden">Search bibliography</label>
+    <input type="search" id="q" placeholder="Search title, author, notes…" autocomplete="off">
+    <label for="sort" class="visually-hidden">Sort</label>
+    <select id="sort">
+      <option value="year-desc">Newest first</option>
+      <option value="year-asc">Oldest first</option>
+      <option value="title-asc">Title A–Z</option>
+    </select>
+  </div>
+  <div class="filterbar" id="filterbar"><!-- type + tag filters rendered by JS --></div>
+  <div class="controls-foot">
+    <p class="results-count" id="results-count" aria-live="polite"></p>
+    <button type="button" class="btn-clear" id="clear-filters" hidden>Clear all filters</button>
+  </div>
+</section>
+
+<section id="biblio-list" class="biblio-list" aria-live="polite"><!-- rows rendered by JS --></section>
+
+<p class="empty-state" id="empty-state" hidden>
+  Nothing matches these filters. <button type="button" class="link-btn" id="empty-clear">Clear filters</button>
+</p>
+
+<aside class="contribute-prompt">
+  <p>Know a paper or SOP we're missing? <a href="{{ '/contribute/' | relative_url }}">Suggest one →</a></p>
+</aside>

@@ -1,0 +1,55 @@
+---
+layout: default
+page_id: methods
+title: Methods
+scripts:
+  - /assets/js/app.js
+---
+<header class="page-head">
+  <h1>Museomics methods</h1>
+  <p class="lead">
+    Working DNA-based methods for museum specimens, filterable by taxon,
+    preservation type, and lab approach. Each entry is a real, tried method
+    contributed by the community.
+  </p>
+</header>
+
+<details class="legend">
+  <summary>What do the tags mean?</summary>
+  <div class="legend-body">
+    <p class="muted">
+      Every method is tagged across up to six facets. Filters combine with
+      <strong>OR within a facet</strong> and <strong>AND across facets</strong>.
+      Chips are colour-coded and carry a short facet badge:
+    </p>
+    <ul class="legend-list" id="legend-list"><!-- rendered by JS --></ul>
+  </div>
+</details>
+
+<section class="controls" aria-label="Search and filters">
+  <div class="searchbar">
+    <label for="q" class="visually-hidden">Search methods</label>
+    <input type="search" id="q" placeholder="Search title, summary, and detail…" autocomplete="off">
+    <label for="sort" class="visually-hidden">Sort</label>
+    <select id="sort">
+      <option value="date-desc">Newest first</option>
+      <option value="date-asc">Oldest first</option>
+      <option value="title-asc">Title A–Z</option>
+    </select>
+  </div>
+  <div class="filterbar" id="filterbar"><!-- facet multi-selects rendered by JS --></div>
+  <div class="controls-foot">
+    <p class="results-count" id="results-count" aria-live="polite"></p>
+    <button type="button" class="btn-clear" id="clear-filters" hidden>Clear all filters</button>
+  </div>
+</section>
+
+<section id="cards" class="card-grid" aria-live="polite"><!-- cards rendered by JS --></section>
+
+<p class="empty-state" id="empty-state" hidden>
+  No methods match these filters. <button type="button" class="link-btn" id="empty-clear">Clear filters</button>
+</p>
+
+<aside class="contribute-prompt">
+  <p>Don't see your method? <a href="{{ '/contribute/' | relative_url }}">Suggest one →</a></p>
+</aside>
