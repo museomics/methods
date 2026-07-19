@@ -67,10 +67,12 @@ truth. CI (`scripts/validate_entries.rb`) fails the build if an entry uses a
 value that isn't listed there, which keeps filtering consistent and stops typos
 fragmenting the taxonomy.
 
-**Need a new tag value?** Add it to `_data/tags.yml` in the same PR. If that
-value is also offered as a dropdown in an issue form, add it to the matching
-list in `.github/ISSUE_TEMPLATE/*.yml` too — the forms can't read `tags.yml`
-automatically. The maintainer curates this vocabulary.
+**Need a new tag value?** Add it to `_data/tags.yml` in the same PR, and add it
+to the matching dropdown in `.github/ISSUE_TEMPLATE/*.yml` too — the forms can't
+read `tags.yml` automatically. CI enforces this: `scripts/validate_entries.rb`
+fails if a form dropdown and the vocabulary drift apart in either direction (a
+stale option, or a vocab value the form doesn't offer). The maintainer curates
+this vocabulary.
 
 ## Local preview
 
