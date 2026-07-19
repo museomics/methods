@@ -2,7 +2,7 @@
 title: "Mitogenome from a historical bird study skin toe pad"
 kingdom: [Animalia]
 phylum: [Chordata]
-preservation: [study-skin]
+preservation: [dry]
 extraction: [magnetic-bead]
 library: [single-stranded]
 sequencing: [shotgun-wgs]
