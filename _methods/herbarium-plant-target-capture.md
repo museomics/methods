@@ -1,9 +1,9 @@
 ---
 title: "Target capture from herbarium sheets using CTAB extraction"
 taxon: [Tracheophyta]
-preservation: [herbarium-pressed]
+preservation: [dry]
 extraction: [ctab]
-library: [hybridization-capture]
+library: [single-stranded]
 sequencing: [target-capture]
 outcome: worked-with-caveats
 contributor: "Seed example — replace with real entry"

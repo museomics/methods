@@ -39,36 +39,30 @@ taxon:
     - Basidiomycota
 
 preservation:
-  - dry-pinned
-  - study-skin
-  - herbarium-pressed
+  - dry
   - fluid-ethanol
   - fluid-formalin
   - frozen
-  - dried-tissue
-  - bone-subfossil
 
 extraction:
   - silica-column
   - magnetic-bead
   - phenol-chloroform
   - ctab
-  - chelex
+  - commercial-kit
+  - diy-approach
 
 library:
-  - tagmentation
-  - ligation
   - single-stranded
-  - pcr-free
-  - hybridization-capture
+  - double-stranded
+  - commercial-kit
+  - diy-approach
 
 sequencing:
   - genome-skimming
   - shotgun-wgs
   - target-capture
-  - metabarcoding
-  - rad-seq
-  - sanger
+
 
 # Optional, controlled outcome signal for method entries (see facets.yml).
 # Lets visitors gauge how well a method worked at a glance. Not a filter facet

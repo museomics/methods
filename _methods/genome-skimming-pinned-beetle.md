@@ -1,9 +1,9 @@
 ---
 title: "Genome skimming from a 40-year-old pinned beetle"
 taxon: [Arthropoda]
-preservation: [dry-pinned]
+preservation: [dry]
 extraction: [silica-column]
-library: [tagmentation]
+library: [diy-approach]
 sequencing: [genome-skimming]
 outcome: worked-well
 contributor: "Seed example — replace with real entry"
