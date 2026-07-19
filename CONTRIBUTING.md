@@ -20,8 +20,7 @@ Add one Markdown file per entry, then open a PR. CI validates it automatically.
 ```yaml
 ---
 title: "Genome skimming from a 40-year-old pinned beetle"
-kingdom: [Animalia]           # one or more, from _data/tags.yml
-phylum: [Arthropoda]          # "Phylum / Division", from _data/tags.yml
+taxon: [Arthropoda]           # phylum/division, from _data/tags.yml (kingdom is implied)
 preservation: [dry-pinned]
 extraction: [silica-column]
 library: [tagmentation]
@@ -37,9 +36,13 @@ Full detail in Markdown. Renders when the card is expanded: protocol notes,
 yields, caveats, links to SOPs in the bibliography, etc.
 ```
 
-Required: `title`, `kingdom`, `phylum`, `preservation`, `extraction`,
-`library`, `sequencing`, `summary`, `contributor`, `date`.
+Required: `title`, `taxon`, `preservation`, `extraction`, `library`,
+`sequencing`, `summary`, `contributor`, `date`.
 Optional: `outcome`, `doi`, body.
+
+`taxon` values are phyla/divisions, grouped under their kingdom in
+`_data/tags.yml`; the kingdom is inferred from that grouping (we represent
+animals, plants and fungi).
 
 ### Bibliography entry — `_bibliography/<short-slug>.md`
 

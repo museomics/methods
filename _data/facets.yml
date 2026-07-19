@@ -3,18 +3,13 @@
 # `abbr` is shown as a small badge on each chip so facets are distinguishable
 # without relying on colour alone (accessibility).
 # `methods` / `bibliography` flag which page a facet applies to.
-- key: kingdom
-  label: Kingdom
-  abbr: K
+- key: taxon
+  label: Taxon
+  abbr: Tx
   color: green
   methods: true
   bibliography: false
-- key: phylum
-  label: Phylum / Division
-  abbr: P
-  color: teal
-  methods: true
-  bibliography: false
+  grouped: true   # values come from a kingdom -> [phyla] map in tags.yml
 - key: preservation
   label: Preservation
   abbr: Pr

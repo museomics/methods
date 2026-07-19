@@ -1,8 +1,10 @@
 # museomics/methods — Build Spec & Implementation Plan (revised)
 
 > Revision note: this supersedes the original draft. Changes from the review:
-> two-level taxonomy (Kingdom + Phylum/Division) replacing a single taxon
-> facet; GitHub Actions build instead of stock GitHub Pages; a single
+> a single Taxon facet whose values are phyla/divisions grouped under kingdom
+> (Animalia / Plantae / Fungi), presented as one dropdown with per-kingdom
+> select-all — replacing the original flat taxon tag; GitHub Actions build
+> instead of stock GitHub Pages; a single
 > canonical controlled vocabulary enforced by CI; free-text search; sort
 > control; empty state; accessible chips (not colour-alone); optional DOI;
 > optional outcome signal; separate content licence (CC BY 4.0).
@@ -53,16 +55,18 @@ Nav bar on every page: **Methods | Bibliography | Contribute**
 
 ## 1. Methods page (`/`)
 
-Let visitors find and filter working methods by **kingdom**, **phylum/division**,
-preservation, extraction, library prep, and sequencing/downstream method.
-Multi-tagging per entry is supported on every facet.
+Let visitors find and filter working methods by **taxon** (phylum/division,
+grouped under kingdom — Animalia / Plantae / Fungi), preservation, extraction,
+library prep, and sequencing/downstream method. Multi-tagging per entry is
+supported on every facet.
 
 ### Layout (top to bottom)
 1. Header — title + one-line purpose.
-2. Tag legend — collapsible explainer of the six facets and their chip
+2. Tag legend — collapsible explainer of the five facets and their chip
    colours/badges.
 3. Controls — free-text search box + sort control (newest / oldest / A–Z), then
-   a filter bar of six collapsible multi-select facets, populated from
+   a filter bar of five collapsible multi-select facets (Taxon is one grouped
+   dropdown), populated from
    `_data/tags.yml`. OR within a facet, AND across facets.
 4. Results count (live) + "Clear all filters".
 5. Card grid.
@@ -80,8 +84,7 @@ Multi-tagging per entry is supported on every facet.
 ```yaml
 ---
 title: "Genome skimming from a 40-year-old pinned beetle"
-kingdom: [Animalia]
-phylum: [Arthropoda]
+taxon: [Arthropoda]           # phylum/division; kingdom implied by grouping
 preservation: [dry-pinned]
 extraction: [silica-column]
 library: [tagmentation]
@@ -94,7 +97,7 @@ doi: "10.xxxx/xxxxx"          # OPTIONAL — omit for unpublished methods
 ---
 Full detail body as Markdown (renders on expand).
 ```
-Required: title, kingdom, phylum, preservation, extraction, library,
+Required: title, taxon, preservation, extraction, library,
 sequencing, summary, contributor, date. DOI is optional so unpublished /
 in-house methods are not excluded.
 
@@ -108,7 +111,7 @@ in-house methods are not excluded.
   (`window.SITE`) so JS never guesses the baseurl and filter options come from
   the config, not just from values present in the data.
 - Active filters, search text and non-default sort are reflected in the URL
-  query string (`?kingdom=Animalia&preservation=dry-pinned&q=beetle`) and
+  query string (`?taxon=Arthropoda&preservation=dry-pinned&q=beetle`) and
   restored on load.
 
 ---

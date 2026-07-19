@@ -14,14 +14,18 @@ TAGS = YAML.safe_load_file(File.join(ROOT, "_data", "tags.yml"))
 
 errors = []
 
-# Front-matter fields on method entries that must be drawn from a vocab list.
-METHOD_FACETS = %w[kingdom phylum preservation extraction library sequencing].freeze
-METHOD_REQUIRED = (METHOD_FACETS + %w[title summary contributor date]).freeze
+# `taxon` is a kingdom -> [phyla] map; entries are tagged at phylum level, so
+# the allowed values are the flattened list of phyla/divisions.
+TAXON_VALUES = TAGS["taxon"].values.flatten.freeze
+
+# Flat-list facets on method entries that must be drawn from a vocab list.
+METHOD_FLAT_FACETS = %w[preservation extraction library sequencing].freeze
+METHOD_REQUIRED = (%w[taxon] + METHOD_FLAT_FACETS + %w[title summary contributor date]).freeze
 
 BIB_REQUIRED = %w[type title authors_or_institution year_or_date link].freeze
 # Any tag on a bibliography entry must exist in one of these facet lists.
 BIB_TAG_VOCAB = (TAGS["extraction"] + TAGS["library"] + TAGS["sequencing"] +
-                 TAGS["preservation"] + TAGS["kingdom"] + TAGS["phylum"]).uniq.freeze
+                 TAGS["preservation"] + TAXON_VALUES).uniq.freeze
 
 def front_matter(path)
   raw = File.read(path, encoding: "UTF-8")
@@ -53,7 +57,11 @@ Dir.glob(File.join(ROOT, "_methods", "*.md")).sort.each do |path|
     errors << "#{rel}: missing required field `#{field}`" if val.nil? || (val.respond_to?(:empty?) && val.empty?)
   end
 
-  METHOD_FACETS.each do |facet|
+  as_array(fm["taxon"]).each do |v|
+    errors << "#{rel}: `taxon` value \"#{v}\" not in _data/tags.yml" unless TAXON_VALUES.include?(v)
+  end
+
+  METHOD_FLAT_FACETS.each do |facet|
     allowed = TAGS[facet] || []
     as_array(fm[facet]).each do |v|
       errors << "#{rel}: `#{facet}` value \"#{v}\" not in _data/tags.yml" unless allowed.include?(v)

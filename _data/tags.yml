@@ -14,31 +14,29 @@
 # except taxonomy, which uses conventional capitalised names.
 # -----------------------------------------------------------------------------
 
-# Taxonomy is split into two levels so visitors can filter broadly (Kingdom) or
-# more specifically (Phylum / Division). Curated by the maintainer; extend as
-# real contributions arrive rather than pre-populating exhaustively.
-kingdom:
-  - Animalia
-  - Plantae
-  - Fungi
-  - Chromista
-  - Bacteria
-  - Archaea
-
-phylum:            # "Phylum / Division" — divisions are the botanical equivalent
-  - Chordata
-  - Arthropoda
-  - Mollusca
-  - Annelida
-  - Echinodermata
-  - Cnidaria
-  - Nematoda
-  - Platyhelminthes
-  - Porifera
-  - Tracheophyta   # vascular plants
-  - Bryophyta      # mosses
-  - Ascomycota
-  - Basidiomycota
+# Taxonomy: a single facet whose values are phyla / divisions, grouped under
+# their kingdom. Entries are tagged at phylum/division level (e.g. taxon:
+# [Arthropoda]); the kingdom is implied by the grouping below. In the filter UI
+# these render as one dropdown with kingdom sub-headings, and each kingdom
+# heading is a "select all" toggle. We only represent animals, plants and fungi.
+# Curated by the maintainer; extend as real contributions arrive.
+taxon:
+  Animalia:
+    - Chordata
+    - Arthropoda
+    - Mollusca
+    - Annelida
+    - Echinodermata
+    - Cnidaria
+    - Nematoda
+    - Platyhelminthes
+    - Porifera
+  Plantae:
+    - Tracheophyta   # vascular plants
+    - Bryophyta      # mosses
+  Fungi:
+    - Ascomycota
+    - Basidiomycota
 
 preservation:
   - dry-pinned

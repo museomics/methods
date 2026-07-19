@@ -1,7 +1,6 @@
 ---
 title: "Genome skimming from a 40-year-old pinned beetle"
-kingdom: [Animalia]
-phylum: [Arthropoda]
+taxon: [Arthropoda]
 preservation: [dry-pinned]
 extraction: [silica-column]
 library: [tagmentation]
