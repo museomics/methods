@@ -6,9 +6,9 @@ types, backed by a curated bibliography of supporting papers and SOPs.
 
 🌐 **Site:** https://museomics.github.io/methods/
 
-- **Methods** (`/`) — filter working methods by kingdom, phylum/division,
-  preservation, extraction, library prep, and sequencing. Cards expand to full
-  protocol notes.
+- **Methods** (`/`) — filter working methods by taxon (phylum/division grouped
+  under kingdom), preservation, extraction, library prep, and sequencing. Cards
+  expand to full protocol notes.
 - **Bibliography** (`/bibliography/`) — papers and SOPs, filterable by type and
   method tag.
 - **Contribute** (`/contribute/`) — suggest an entry via issue form, or by PR.

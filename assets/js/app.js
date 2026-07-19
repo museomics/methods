@@ -229,11 +229,54 @@
     }
 
     CONFIG.facets.forEach(function (f) {
+      if (f.grouped) {
+        bar.appendChild(groupedFacet(f));
+        return;
+      }
       var vocab = SITE.vocab[f.key] || [];
       bar.appendChild(facetGroup(f, vocab, filters[f.key], function (val, on) {
         toggleIn(filters[f.key], val, on); update();
       }));
     });
+  }
+
+  // A grouped facet (e.g. Taxon): one dropdown whose options are nested under
+  // group headings (kingdoms). Each heading is a select-all toggle for its
+  // children (phyla/divisions). Only the children (leaf values) are stored in
+  // the filter state.
+  function groupedFacet(facet) {
+    var map = SITE.vocab[facet.key] || {};
+    var selectedRef = filters[facet.key];
+
+    var groups = Object.keys(map).map(function (groupName) {
+      var children = map[groupName];
+      var selectedKids = children.filter(function (c) { return selectedRef.indexOf(c) !== -1; });
+
+      var head = el("input", { type: "checkbox" });
+      head.checked = selectedKids.length === children.length && children.length > 0;
+      head.indeterminate = selectedKids.length > 0 && selectedKids.length < children.length;
+      head.addEventListener("change", function () {
+        children.forEach(function (c) { toggleIn(selectedRef, c, head.checked); });
+        update();
+      });
+      var heading = el("label", { class: "opt opt--group" }, [head, el("strong", { text: groupName })]);
+
+      var kids = children.map(function (c) {
+        var box = el("input", { type: "checkbox", value: c });
+        if (selectedRef.indexOf(c) !== -1) box.checked = true;
+        box.addEventListener("change", function () { toggleIn(selectedRef, c, box.checked); update(); });
+        return el("label", { class: "opt opt--child" }, [box, el("span", { text: c })]);
+      });
+
+      return el("div", { class: "facet-subgroup" }, [heading].concat(kids));
+    });
+
+    var details = el("details", { class: "facet facet--" + facet.color });
+    if (selectedRef.length) details.open = true;
+    var count = selectedRef.length ? " (" + selectedRef.length + ")" : "";
+    details.appendChild(el("summary", { text: facet.label + count }));
+    details.appendChild(el("div", { class: "facet-opts" }, groups));
+    return details;
   }
 
   function facetGroup(facet, values, selectedRef, onToggle, labelFn) {

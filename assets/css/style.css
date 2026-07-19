@@ -98,6 +98,10 @@ main.container { padding-top: 1.6rem; padding-bottom: 3rem; }
 .facet-opts { padding: .5rem .7rem; max-height: 240px; overflow-y: auto; }
 .opt { display: flex; align-items: center; gap: .45rem; padding: .15rem 0; cursor: pointer; }
 .opt input { margin: 0; }
+.facet-subgroup { margin-bottom: .4rem; }
+.facet-subgroup + .facet-subgroup { border-top: 1px solid var(--border); padding-top: .4rem; }
+.opt--group { font-size: .95rem; }
+.opt--child { padding-left: 1.3rem; }
 
 .controls-foot { display: flex; align-items: center; gap: 1rem; margin-top: .9rem; }
 .results-count { margin: 0; font-weight: 600; }

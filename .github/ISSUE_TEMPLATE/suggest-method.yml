@@ -25,19 +25,15 @@ body:
     validations:
       required: true
   - type: dropdown
-    id: kingdom
+    id: taxon
     attributes:
-      label: Kingdom*
-      multiple: true
-      options: [Animalia, Plantae, Fungi, Chromista, Bacteria, Archaea]
-    validations:
-      required: true
-  - type: dropdown
-    id: phylum
-    attributes:
-      label: Phylum / Division*
+      label: Taxon — phylum / division*
+      description: >-
+        Pick the phylum/division(s). Grouped by kingdom for reference (Animalia,
+        Plantae, Fungi). Choose "Other" if yours isn't listed and describe it below.
       multiple: true
       options:
+        # Animalia
         - Chordata
         - Arthropoda
         - Mollusca
@@ -47,8 +43,10 @@ body:
         - Nematoda
         - Platyhelminthes
         - Porifera
+        # Plantae
         - Tracheophyta
         - Bryophyta
+        # Fungi
         - Ascomycota
         - Basidiomycota
         - "Other (describe in detail box)"

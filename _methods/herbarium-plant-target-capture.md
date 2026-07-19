@@ -1,7 +1,6 @@
 ---
 title: "Target capture from herbarium sheets using CTAB extraction"
-kingdom: [Plantae]
-phylum: [Tracheophyta]
+taxon: [Tracheophyta]
 preservation: [dry]
 extraction: [ctab]
 library: [single-stranded]
