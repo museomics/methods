@@ -1,9 +1,11 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 #
-# Validates every method and bibliography entry against the controlled
-# vocabulary in _data/tags.yml and a small required-field schema.
-# Exits non-zero (failing CI) if any entry is invalid. Run:
+# Validates (1) every method and bibliography entry against the controlled
+# vocabulary in _data/tags.yml and a small required-field schema, and (2) that
+# the GitHub Issue Form dropdowns stay in sync with that vocabulary (the forms
+# can't read _data/tags.yml, so this guards against drift).
+# Exits non-zero (failing CI) if anything is invalid. Run:
 #   ruby scripts/validate_entries.rb
 
 require "yaml"
@@ -11,6 +13,7 @@ require "date"
 
 ROOT = File.expand_path("..", __dir__)
 TAGS = YAML.safe_load_file(File.join(ROOT, "_data", "tags.yml"))
+FACETS = YAML.safe_load_file(File.join(ROOT, "_data", "facets.yml"))
 
 errors = []
 
@@ -96,9 +99,55 @@ Dir.glob(File.join(ROOT, "_bibliography", "*.md")).sort.each do |path|
   end
 end
 
+# --- issue-form vocabulary sync -------------------------------------------
+# Each form dropdown must offer exactly the vocabulary it maps to: no stale
+# values (offered but no longer in tags.yml) and no missing values (in the
+# vocab but not offered). The "Other (describe…)" escape hatch is exempt.
+def facet_vocab(facet)
+  facet["grouped"] ? TAGS[facet["key"]].values.flatten : (TAGS[facet["key"]] || [])
+end
+
+def check_form(rel, expected, errors)
+  path = File.join(ROOT, rel)
+  unless File.exist?(path)
+    errors << "#{rel}: file not found"
+    return
+  end
+  form = YAML.safe_load_file(path)
+  dropdowns = (form["body"] || []).each_with_object({}) do |b, h|
+    h[b["id"]] = b if b.is_a?(Hash) && b["type"] == "dropdown"
+  end
+
+  expected.each do |id, vocab|
+    field = dropdowns[id]
+    unless field
+      errors << "#{rel}: expected dropdown `#{id}` is missing"
+      next
+    end
+    offered = Array(field.dig("attributes", "options")).reject { |o| o.to_s.start_with?("Other") }
+
+    dupes = offered.select { |o| offered.count(o) > 1 }.uniq
+    dupes.each { |v| errors << "#{rel}: `#{id}` lists \"#{v}\" more than once" }
+
+    (offered - vocab).each { |v| errors << "#{rel}: `#{id}` offers \"#{v}\" which is not in _data/tags.yml" }
+    (vocab - offered).each { |v| errors << "#{rel}: `#{id}` is missing vocab value \"#{v}\" (add it or the form drifts from tags.yml)" }
+  end
+end
+
+# Method form: one dropdown per method-applicable facet, plus outcome.
+method_expected = {}
+FACETS.select { |f| f["methods"] }.each { |f| method_expected[f["key"]] = facet_vocab(f) }
+method_expected["outcome"] = TAGS["outcome"] || []
+check_form(".github/ISSUE_TEMPLATE/suggest-method.yml", method_expected, errors)
+
+# Bibliography form: a single `tags` dropdown = union of bibliography-applicable
+# facet vocabularies (deduped).
+bib_tag_vocab = FACETS.select { |f| f["bibliography"] }.flat_map { |f| facet_vocab(f) }.uniq
+check_form(".github/ISSUE_TEMPLATE/suggest-bibliography.yml", { "tags" => bib_tag_vocab }, errors)
+
 # --- report ----------------------------------------------------------------
 if errors.empty?
-  puts "✓ All entries valid."
+  puts "✓ All entries and issue forms valid."
   exit 0
 else
   warn "✗ #{errors.length} validation error(s):"

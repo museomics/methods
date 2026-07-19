@@ -46,22 +46,20 @@ body:
       label: Relevant method tags
       multiple: true
       options:
+        # extraction
         - silica-column
         - magnetic-bead
         - phenol-chloroform
         - ctab
-        - chelex
-        - tagmentation
-        - ligation
+        - commercial-kit
+        - diy-approach
+        # library
         - single-stranded
-        - pcr-free
-        - hybridization-capture
+        - double-stranded
+        # sequencing
         - genome-skimming
         - shotgun-wgs
         - target-capture
-        - metabarcoding
-        - rad-seq
-        - sanger
     validations:
       required: false
   - type: input
